@@ -3,9 +3,9 @@ using wrtroad_infraestructureweb.api.core.domain.entities;
 
 namespace wrtroad_infraestructureweb.api.core.infrastructure.persistence.seeders
 {
-    public static class ModelBuilderRoleExtensions
+    public static class ModelBuilderSeederExtensions
     {
-        public static void SeedRole(this ModelBuilder modelBuilder)
+        public static void SeedConfiguration(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<RoleEntity>().HasData(
                 new RoleEntity()
@@ -24,6 +24,13 @@ namespace wrtroad_infraestructureweb.api.core.infrastructure.persistence.seeders
                     Name = "client-writter"
                 }
             );
+            modelBuilder.Entity<UserRoleEntity>().HasData(
+               new UserRoleEntity()
+               {
+                   UserId = 1,
+                   RoleId = 1
+               }
+           );           
         }
     }
 }

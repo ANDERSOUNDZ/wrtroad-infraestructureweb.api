@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="core\infrastructure\data\migrations\" />
     <Folder Include="modules\user\domain\" />
     <Folder Include="modules\user\infrastructure\" />
     <Folder Include="test\" />

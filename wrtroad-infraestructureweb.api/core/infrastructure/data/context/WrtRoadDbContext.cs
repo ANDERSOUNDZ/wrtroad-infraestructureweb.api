@@ -16,7 +16,7 @@ namespace wrtroad_infraestructureweb.api.core.infrastructure.data.context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.SeedRole();
+            modelBuilder.SeedConfiguration();
             modelBuilder.Entity<UserRoleEntity>()
                 .HasKey(ur => new { ur.UserId, ur.RoleId });
             modelBuilder.Entity<UserRoleEntity>()

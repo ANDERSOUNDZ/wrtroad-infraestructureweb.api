@@ -6,10 +6,9 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using wrtroad_infraestructureweb.api.core.infrastructure.data.context;
 
-
 #nullable disable
 
-namespace wrtroad_infraestructureweb.api.modules.auth.infrastructure.data.migrations
+namespace wrtroad_infraestructureweb.api.core.infrastructure.data.migrations
 {
     [DbContext(typeof(WrtRoadDbContext))]
     partial class WrtRoadDbContextModelSnapshot : ModelSnapshot
@@ -23,36 +22,7 @@ namespace wrtroad_infraestructureweb.api.modules.auth.infrastructure.data.migrat
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("wrtroad_infraestructureweb.api.modules.auth.domain.entities.EmailVerificationEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsVerified")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("VerificationToken")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("EmailVerifications");
-                });
-
-            modelBuilder.Entity("wrtroad_infraestructureweb.api.modules.auth.domain.entities.RoleEntity", b =>
+            modelBuilder.Entity("wrtroad_infraestructureweb.api.core.domain.entities.RoleEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,7 +57,7 @@ namespace wrtroad_infraestructureweb.api.modules.auth.infrastructure.data.migrat
                         });
                 });
 
-            modelBuilder.Entity("wrtroad_infraestructureweb.api.modules.auth.domain.entities.UserEntity", b =>
+            modelBuilder.Entity("wrtroad_infraestructureweb.api.core.domain.entities.UserEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -127,9 +97,22 @@ namespace wrtroad_infraestructureweb.api.modules.auth.infrastructure.data.migrat
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateRegister = new DateTime(2025, 4, 6, 21, 42, 32, 605, DateTimeKind.Local).AddTicks(7520),
+                            Email = "andersonmikol@live.com",
+                            Name = "Anderson",
+                            Password = "eIN8kyMYRkwfELCca+aSO0hir851wG+c7C/pQ23TX5MrXvy/6QJZF/5Wf9dlB3q0VPgMWL/uYtUiPGqo+v+5YQ==",
+                            Salt = "lEX/6gyp11opuxs2nzFk6+opDs/QZ7Mme7/NKpmOGmjZtdmU5i+SIeDFC6WwrvqZMaSQyIzyes4vbUdyrGTDuM8CfXUkd5nhie26pFHjdwIG6ta6aowu65t1UgMyHLBrtynz9zdIBrBLSCwxkBLd5J/bPqxCuFkQGpe8IueimzA=",
+                            Surname = "Chanchay",
+                            Username = "andersoundz"
+                        });
                 });
 
-            modelBuilder.Entity("wrtroad_infraestructureweb.api.modules.auth.domain.entities.UserRoleEntity", b =>
+            modelBuilder.Entity("wrtroad_infraestructureweb.api.core.domain.entities.UserRoleEntity", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -142,28 +125,53 @@ namespace wrtroad_infraestructureweb.api.modules.auth.infrastructure.data.migrat
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        });
                 });
 
             modelBuilder.Entity("wrtroad_infraestructureweb.api.modules.auth.domain.entities.EmailVerificationEntity", b =>
                 {
-                    b.HasOne("wrtroad_infraestructureweb.api.modules.auth.domain.entities.UserEntity", "User")
-                        .WithOne()
-                        .HasForeignKey("wrtroad_infraestructureweb.api.modules.auth.domain.entities.EmailVerificationEntity", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Navigation("User");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("VerificationToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("EmailVerifications");
                 });
 
-            modelBuilder.Entity("wrtroad_infraestructureweb.api.modules.auth.domain.entities.UserRoleEntity", b =>
+            modelBuilder.Entity("wrtroad_infraestructureweb.api.core.domain.entities.UserRoleEntity", b =>
                 {
-                    b.HasOne("wrtroad_infraestructureweb.api.modules.auth.domain.entities.RoleEntity", "Role")
+                    b.HasOne("wrtroad_infraestructureweb.api.core.domain.entities.RoleEntity", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("wrtroad_infraestructureweb.api.modules.auth.domain.entities.UserEntity", "User")
+                    b.HasOne("wrtroad_infraestructureweb.api.core.domain.entities.UserEntity", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -174,12 +182,23 @@ namespace wrtroad_infraestructureweb.api.modules.auth.infrastructure.data.migrat
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("wrtroad_infraestructureweb.api.modules.auth.domain.entities.RoleEntity", b =>
+            modelBuilder.Entity("wrtroad_infraestructureweb.api.modules.auth.domain.entities.EmailVerificationEntity", b =>
+                {
+                    b.HasOne("wrtroad_infraestructureweb.api.core.domain.entities.UserEntity", "User")
+                        .WithOne()
+                        .HasForeignKey("wrtroad_infraestructureweb.api.modules.auth.domain.entities.EmailVerificationEntity", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("wrtroad_infraestructureweb.api.core.domain.entities.RoleEntity", b =>
                 {
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("wrtroad_infraestructureweb.api.modules.auth.domain.entities.UserEntity", b =>
+            modelBuilder.Entity("wrtroad_infraestructureweb.api.core.domain.entities.UserEntity", b =>
                 {
                     b.Navigation("UserRoles");
                 });

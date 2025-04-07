@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace wrtroad_infraestructureweb.api.modules.auth.infrastructure.data.migrations
+namespace wrtroad_infraestructureweb.api.core.infrastructure.data.migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -100,6 +100,16 @@ namespace wrtroad_infraestructureweb.api.modules.auth.infrastructure.data.migrat
                     { 2, "mid-admin" },
                     { 3, "client-writter" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "DateRegister", "Email", "Name", "Password", "Salt", "Surname", "Username" },
+                values: new object[] { 1, new DateTime(2025, 4, 6, 21, 42, 32, 605, DateTimeKind.Local).AddTicks(7520), "andersonmikol@live.com", "Anderson", "eIN8kyMYRkwfELCca+aSO0hir851wG+c7C/pQ23TX5MrXvy/6QJZF/5Wf9dlB3q0VPgMWL/uYtUiPGqo+v+5YQ==", "lEX/6gyp11opuxs2nzFk6+opDs/QZ7Mme7/NKpmOGmjZtdmU5i+SIeDFC6WwrvqZMaSQyIzyes4vbUdyrGTDuM8CfXUkd5nhie26pFHjdwIG6ta6aowu65t1UgMyHLBrtynz9zdIBrBLSCwxkBLd5J/bPqxCuFkQGpe8IueimzA=", "Chanchay", "andersoundz" });
+
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_EmailVerifications_UserId",

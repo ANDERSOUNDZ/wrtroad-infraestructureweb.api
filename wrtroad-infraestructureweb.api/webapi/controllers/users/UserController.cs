@@ -22,7 +22,7 @@ namespace wrtroad_infraestructureweb.api.webapi.controllers.users
         {
             try
             {
-                return Ok();
+                return Ok("hola");
                 //var usersResponseList = await _applicationService.GetAllUsersListAsync();
                 //return Success("Users response successfully.", usersResponseList);
             }
